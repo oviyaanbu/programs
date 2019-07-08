@@ -1,0 +1,22 @@
+import java.util.Scanner;
+public class Nprime {
+	public static void main(String args[]) {
+		Scanner scan=new Scanner(System.in);
+		int n=scan.nextInt();
+		int nums=1,count=0,i;
+		while(count<n)
+		{
+			nums=nums+1;
+			for(i=2;i<=nums;i++) {
+				if(nums%i==0) {
+					break;
+				}
+			}
+			if(i==nums) {
+				count=count+1;
+			}
+		}
+		System.out.println("Nth Prime:"+nums);
+	}
+
+}
