@@ -1,0 +1,13 @@
+package com.ksr.student.dao;
+
+import com.ksr.student.model.Student;
+
+public interface IstudentDao {
+public boolean addStudent(Student student);
+public void updateStudent(int student_id,Student student);
+public void deleteStudent(int student_id);
+public Student viewStudent(int student_id);
+
+
+
+}
