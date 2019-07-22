@@ -1,0 +1,89 @@
+package com.ksr.student.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ksr.student.model.Student;
+import com.ksr.student.model.student.MysqlDB;
+
+public class Mysql implements IstudentDao {
+
+	@Override
+	public boolean addStudent(Student student) {
+		Connection connection=MysqlDB.getDBConnection();
+		try {
+			PreparedStatement ps=connection.prepareStatement("INSERT INTO Ksr values(?,?,?,?,?)");
+			ps.setInt(1,student.getStudent_id());
+			ps.setString(2,student.getFirst_name());
+			ps.setString(3, student.getLast_name());
+			ps.setInt(4,student. getAge());
+			ps.setString(5,student.getDepartment());
+			ps.execute();
+			return true;
+		}catch(SQLException e) {
+			e.printStackTrace();
+			
+		
+		}
+		return false;
+	}
+	@Override
+	public void updateStudent(int student_id, Student student) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteStudent(int student_id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Student viewStudent(int student_id) {
+			Connection dbconnection=MysqlDB.getDBConnection();
+
+			try
+			{
+			PreparedStatement ps=dbconnection.prepareStatement("SELECT * FROM ksr");
+
+//				ps.setInt(1, student_id);
+			ResultSet rs=ps.executeQuery();
+			List<Student> list=new ArrayList<Student>();
+			while(rs.next())
+			{
+			Student student = new Student();
+			student.setStudent_id(rs.getInt(1));
+			student.setFirst_name(rs.getString("first_name"));
+			student.setLast_name(rs.getString("last_name"));
+			student.setAge(rs.getInt(4));
+			student.setDepartment(rs.getString(5));
+			list.add(student);
+
+			}
+			System.out.println(list);
+			}catch(SQLException e)
+			{
+			e.printStackTrace();
+			}
+			return null;
+			}
+		
+		
+		
+	
+
+	
+	public static void main(String args[])
+	{
+		Mysql sd=new Mysql();
+		boolean b=sd.addStudent(new Student(0,"john","peter",25,"IT"));
+		if(b)
+			System.out.println("Students inserted succesfully!!!");
+		System.out.println(sd.viewStudent(1));
+	}
+}
