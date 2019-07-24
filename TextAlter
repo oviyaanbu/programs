@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+public class TextAlter {
+public static void main(String[] args)
+{
+Scanner scan=new Scanner(System.in);
+String string=scan.nextLine();
+scan.close();
+String str1="",str2="",letter="ay",first="",last="";
+String[] array=string.split("\\s");
+str1=array[0];
+str2=array[1];
+first=alter(str1,letter);
+last=alter(str2,letter);
+System.out.println(first+" "+last);
+}
+public static String alter(String str,String letter)
+{
+int length=str.length();
+int count=0;
+char[] c=str.toCharArray();
+char[] c1=new char[length];
+for(int i=1;i<length;i++)
+{
+c1[i-1]=c[i];
+count++;
+}
+c1[count]=c[0];
+String string=new String(c1);
+String result=string+letter;
+return result;
+
+}
+}
